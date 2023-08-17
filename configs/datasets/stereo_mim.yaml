@@ -1,11 +1,11 @@
 dataset_config:
   dataset_name: stereo_mim
   dataset_builder: stereo_vision_mim
-  root_dir: /media/neuralmaster/9d5af100-a900-4e89-bab1-43c8b5025daf/neuromaster/MainImportant/MRES/tiaW/data
+  root_dir: /tiaW/data
 
   dataset_mode: 
     image_type: mixed # 'mixed', 'real', 'synthetic' or 'individual'
-    individual_name: # this arg is only used if image_type arg = 'individual'
+    #individual_name: kitti # this arg is only used if image_type arg = 'individual'
     # 'mixed' = train mim with mix of real and synthetic scenes
     # 'synthetic' = if training with synthetic only, 
     # 'real' = training with real only
