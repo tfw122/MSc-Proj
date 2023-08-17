@@ -79,7 +79,8 @@ class LightningTrainer(BaseTrainer):
 
         lightning_params_dict = OmegaConf.to_container(lightning_params, resolve=True)
         # max epochs specified in trainer_config;
-        lightning_params_dict['gpu'] = [0]
+        if 'gpu' in lightning_params_dict:
+            lightning_params_dict.pop('gpu')
         if 'tpu_cores' in lightning_params_dict:
             lightning_params_dict.pop('tpu_cores')
         self.trainer = Trainer(default_root_dir=self.log_dir,
