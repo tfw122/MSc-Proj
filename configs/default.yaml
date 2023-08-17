@@ -53,7 +53,7 @@ training:
     callbacks:
         - type: CheckpointEveryNSteps
           params:
-            save_step_frequency: 6500
+            save_step_frequency: 2789
             prefix: "N-Step-Checkpoint" 
             use_modelcheckpoint_filename: False
 

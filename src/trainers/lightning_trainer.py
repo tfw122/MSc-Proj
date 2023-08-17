@@ -95,9 +95,10 @@ class LightningTrainer(BaseTrainer):
         # saves a file like: my/path/sample-mnist-epoch=02-val_loss=0.32.ckpt
         self.checkpoint_callback = ModelCheckpoint(
             monitor=self.config.model_config.ckpt_monitor,
-            save_top_k=-1,
+            save_top_k=1,
+            mode = 'min',
             dirpath=self.log_dir,
-            filename="sample-{epoch:03d}-{val_loss:.2f}",
+            filename="best-model-{epoch:03d}-{val_loss:.2f}",
             every_n_epochs=1,
             save_on_train_epoch_end=True,
         )

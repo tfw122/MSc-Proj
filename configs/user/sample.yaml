@@ -1,16 +1,16 @@
 user_config:
   # SAVING CHECKPOINTS
   save_locally: True
-  save_root_dir: " /media/neuralmaster/9d5af100-a900-4e89-bab1-43c8b5025daf/neuromaster/MainImportant/MRES/tiaW/data"
+  save_root_dir: "/tiaw/data"
 
   # ------------------- RUN ARGS -------------------
   # Name of the experiment, will be used while saving checkpoints
   # and generating reports
-  experiment_name: stereo_downstream_perceptual_all #mae_stereo_mim_perceptual
+  experiment_name:  mae_stereo_mim_perceptual #stereo_downstream_perceptual_all
   task_type: downstream4
 
   # # ------------------- S3 ARGS -------------------
-  data_dir: " /media/neuralmaster/9d5af100-a900-4e89-bab1-43c8b5025daf/neuromaster/MainImportant/MRES/tiaW/data"
+  data_dir: "/tiaW/data"
   username_prefix: tiawarner
   # Outputs to s3://s3bucket_name/s3key_prefix/{part_name}_{task_type}/{experiment_name}/{timestamp}/
 
