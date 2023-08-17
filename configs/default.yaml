@@ -67,10 +67,11 @@ trainer:
     # https://pytorch-lightning.readthedocs.io/en/latest/trainer.html#trainer-class-api
     type: lightning
     params:
-        gpu: 0 # [id1, id2 ...] for selecting specific GPUs, -1 for all gpus
+        #gpu: 0 # [id1, id2 ...] for selecting specific GPUs, -1 for all gpus
         tpu_cores: null
-        #accelerator: gpu
+        accelerator: gpu
         num_nodes: 1
+        devices: 0
         precision: 32 # for Downstream = 16 for MIM = 32.
         deterministic: false
         benchmark: false
