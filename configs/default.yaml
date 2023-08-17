@@ -67,7 +67,7 @@ trainer:
     # https://pytorch-lightning.readthedocs.io/en/latest/trainer.html#trainer-class-api
     type: lightning
     params:
-        gpus: -1 # [id1, id2 ...] for selecting specific GPUs, -1 for all gpus
+        gpu: 0 # [id1, id2 ...] for selecting specific GPUs, -1 for all gpus
         tpu_cores: null
         #accelerator: gpu
         num_nodes: 1
