@@ -1,0 +1,3 @@
+wget http://files.is.tue.mpg.de/jwulff/sintel/MPI-Sintel-stereo-training-20150305.zip
+
+unzip MPI-Sintel-stereo-training-20150305.zip
