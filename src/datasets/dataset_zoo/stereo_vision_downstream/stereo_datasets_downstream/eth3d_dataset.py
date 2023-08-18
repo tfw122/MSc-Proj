@@ -24,7 +24,7 @@ from src.datasets.dataset_zoo.stereo_vision_downstream.base_stereo_dataset impor
 
 @registry.register_datamodule("eth3d_downstream")
 class ETH3D(StereoDataset):
-    def __init__(self, config, aug_params=None, root='/data/MiddEval3', split='training'):
+    def __init__(self, config, aug_params=None, root='/data/eth3d', split='training'):
         super(ETH3D, self).__init__(config, aug_params, sparse=True)
         if split=='train':
             split_path = "training"
