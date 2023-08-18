@@ -1,4 +1,4 @@
-mkdir /middlebury -p
+mkdir /middlebury 
 cd /middlebury/
 wget https://www.dropbox.com/s/fn8siy5muak3of3/official_train.txt -P MiddEval3/
 wget https://vision.middlebury.edu/stereo/submit3/zip/MiddEval3-data-Q.zip
@@ -16,7 +16,7 @@ unzip MiddEval3-GT0-F.zip
 rm *.zip
 cd ../
 
-mkdir /eth3d -p
+mkdir /eth3d 
 cd /eth3d/
 mkdir ./two_view_test
 cd ./two_view_test
