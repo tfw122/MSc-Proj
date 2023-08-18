@@ -1,5 +1,5 @@
-mkdir /data/stereo_data/middlebury -p
-cd /data/stereo_data/middlebury/
+mkdir /middlebury -p
+cd /middlebury/
 wget https://www.dropbox.com/s/fn8siy5muak3of3/official_train.txt -P MiddEval3/
 wget https://vision.middlebury.edu/stereo/submit3/zip/MiddEval3-data-Q.zip
 unzip MiddEval3-data-Q.zip
@@ -14,10 +14,10 @@ unzip MiddEval3-data-F.zip
 wget https://vision.middlebury.edu/stereo/submit3/zip/MiddEval3-GT0-F.zip
 unzip MiddEval3-GT0-F.zip
 rm *.zip
-cd ../..
+cd ../
 
-mkdir /data/stereo_data/eth3d -p
-cd /data/stereo_data/eth3d/
+mkdir /eth3d -p
+cd /eth3d/
 mkdir ./two_view_test
 cd ./two_view_test
 wget https://www.eth3d.net/data/two_view_test.7z

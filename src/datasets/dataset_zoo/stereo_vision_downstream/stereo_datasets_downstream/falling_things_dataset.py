@@ -24,7 +24,7 @@ from src.datasets.dataset_zoo.stereo_vision_downstream.base_stereo_dataset impor
 
 @registry.register_datamodule("falling_things_single_downstream")
 class FallingThingsSingle(StereoDataset):
-    def __init__(self, config, aug_params=None, root='/data/stereo_data/fallingthings', split='train'):
+    def __init__(self, config, aug_params=None, root='/data/falling_things', split='train'):
         super().__init__(config, aug_params, reader=frame_utils.readDispFallingThings)
         assert os.path.exists(root)
         self.config = config
@@ -65,7 +65,7 @@ class FallingThingsSingle(StereoDataset):
 
 @registry.register_datamodule("falling_things_mixed_downstream")
 class FallingThingsMixed(StereoDataset):
-    def __init__(self, config, aug_params=None, root='/data/stereo_data/fallingthings', split='train'):
+    def __init__(self, config, aug_params=None, root='/data/falling_things', split='train'):
         super().__init__(config, aug_params, reader=frame_utils.readDispFallingThings)
         assert os.path.exists(root)
         self.config = config

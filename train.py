@@ -15,11 +15,11 @@ def main():
 
     fileio_client = FileIOClient(config)
 
-    # start training:
-    #if config.model_config.load_ckpt_model_only!=None:
-    #   	ckpt_path = config.model_config.load_ckpt_model_only
-    #else:
-    ckpt_path = None
+    #start training:
+    if config.model_config.load_ckpt_model_only!=None:
+        ckpt_path = config.model_config.load_ckpt_model_only
+    else:
+        ckpt_path = None
         
     trainer = build_trainer(config, fileio_client, ckpt_path)
     trainer.train()

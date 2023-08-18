@@ -1,7 +1,7 @@
 dataset_config:
   dataset_name: stereo_downstream
   dataset_builder: stereo_vision_downstream
-  root_dir: /data/stereo_data
+  root_dir: /data
   
   # for some reason, RAFT multiplies some of the dataset size;
   # https://github.com/princeton-vl/RAFT-Stereo/blob/main/core/stereo_datasets.py#L301
@@ -29,8 +29,6 @@ dataset_config:
     - sceneflow_clean_downstream
     - sceneflow_final_downstream
     - sintel_stereo_downstream
-    - tartan_air_easy_downstream
-    - tartan_air_hard_downstream
     - middlebury_custom_downstream
     - middlebury_downstream
     - eth3d_downstream

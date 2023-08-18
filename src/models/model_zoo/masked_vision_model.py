@@ -273,6 +273,30 @@ class MaskedImageAutoEncoder(BaseModel):
         # grid = torchvision.utils.make_grid(sample_imgs) 
         # self.logger.experiment.add_image('generated_images', grid, 0) 
 
+    # Assuming the existing code (VQ-based model) is already in place...
+
+    def patch_aggregation(vq_output, masked_output):
+        """
+        Function to aggregate and concatenate VQ-based model's output and masked image model's output.
+        
+        Parameters:
+        - vq_output: tuple of tensors; (l_quant, r_quant) from the VQ-based model.
+        - masked_output: tensor; output from the masked image model.
+
+        Returns:
+        - aggregated_output: concatenated output tensor.
+        """
+        
+        # Flatten the output tensors for concatenation
+        flattened_l_quant = vq_output[0].view(vq_output[0].size(0), -1)
+        flattened_r_quant = vq_output[1].view(vq_output[1].size(0), -1)
+        flattened_masked_output = masked_output.view(masked_output.size(0), -1)
+        
+        # Concatenate along the feature dimension
+        aggregated_output = torch.cat([flattened_l_quant, flattened_r_quant, flattened_masked_output], dim=1)
+        
+        return aggregated_output
+
 @registry.register_model("masked_image_autoencoder_msg_gan")
 class MultiScaleMaskedImageAutoEncoder(BaseModel):
     """

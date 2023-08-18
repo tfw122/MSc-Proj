@@ -17,7 +17,7 @@ import logging
 class FallingThingsSingleLoader(Dataset):
     def __init__(self, config, split, transform=None):
         self.dataset_config = config.dataset_config
-        self.root_dir = '{}/fallingthings/fat/single'.format(self.dataset_config.root_dir)
+        self.root_dir = '{}/falling_things/fat/single'.format(self.dataset_config.root_dir)
 
         self.split_ratio = self.dataset_config.db_split_ratio
 

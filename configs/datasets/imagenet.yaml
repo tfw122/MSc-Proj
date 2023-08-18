@@ -1,7 +1,7 @@
 dataset_config:
   dataset_name: imagenet
   dataset_builder: imagenet
-  save_dir: /data/imagenet
+  save_dir: /data
   val_samples: 1000
     
   preprocess:

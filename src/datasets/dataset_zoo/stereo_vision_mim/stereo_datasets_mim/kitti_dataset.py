@@ -17,7 +17,7 @@ import logging
 class KittiEigenStereoLoader(Dataset):
     def __init__(self, config, split, transform=None):
         self.dataset_config = config.dataset_config
-        self.root_dir = self.dataset_config.root_dir
+        self.root_dir = '{}/kitti_data'.format(self.dataset_config.root_dir)
 
         if split =='train':
             self.all_paths= np.load('src/datasets/db_utils/dataset_splits/kitti_eigen_splits/eigen_train_paths.npy')

@@ -24,7 +24,7 @@ from src.datasets.dataset_zoo.stereo_vision_downstream.base_stereo_dataset impor
 
 @registry.register_datamodule("kitti_downstream")
 class KITTI(StereoDataset):
-    def __init__(self, config, aug_params=None, root='/data/stereo_data/kitti_stereo_2015', split='train', image_set='training'):
+    def __init__(self, config, aug_params=None, root='/data/kitti_data', split='train', image_set='training'):
         super(KITTI, self).__init__(config, aug_params, sparse=True, reader=frame_utils.readDispKITTI)
         assert os.path.exists(root)
         self.config = config

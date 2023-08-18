@@ -24,7 +24,7 @@ from src.datasets.dataset_zoo.stereo_vision_downstream.base_stereo_dataset impor
 
 @registry.register_datamodule("tartan_air_easy_downstream")
 class TartanAirEasy(StereoDataset):
-    def __init__(self, config, aug_params=None, root='/data/stereo_data/tartan_air_extracted', split='train', keywords=[]):
+    def __init__(self, config, aug_params=None, root='/data/tartan_air_extracted', split='train', keywords=[]):
         super().__init__(config, aug_params, reader=frame_utils.readDispTartanAir)
         assert os.path.exists(root)
         self.config = config

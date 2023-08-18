@@ -24,7 +24,7 @@ from src.datasets.dataset_zoo.stereo_vision_downstream.base_stereo_dataset impor
 
 @registry.register_datamodule("sintel_stereo_downstream")
 class SintelStereo(StereoDataset):
-    def __init__(self, config, aug_params=None, root='/data/stereo_data/sintel_stereo', split='train'):
+    def __init__(self, config, aug_params=None, root='/data/sintel_stereo', split='train'):
         super().__init__(config, aug_params, sparse=True, reader=frame_utils.readDispSintelStereo)
         self.config = config
         self.dataset_config = self.config.dataset_config
