@@ -1,7 +1,7 @@
 dataset_config:
   dataset_name: stereo_mim
   dataset_builder: stereo_vision_mim
-  root_dir: /data
+  root_dir: ../data
 
   dataset_mode: 
     image_type: mixed # 'mixed', 'real', 'synthetic' or 'individual'

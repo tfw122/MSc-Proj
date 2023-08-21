@@ -7,8 +7,8 @@ from collections import OrderedDict
 
 def get_args():
     parse = argparse.ArgumentParser()
-    parse.add_argument('--input_path', type=str, default=' /media/neuralmaster/9d5af100-a900-4e89-bab1-43c8b5025daf/neuromaster/MainImportant/MRES/tiaW/Masked-Auto-Encoder-for-Stereo-Depth-Estimation/data/tiawarner/geico_and_nugen_mae_perceptual/gieco_and_nugen_mae_training_v2/train_outputs/sample-epoch=069-val_loss=0.66.ckpt', help="the directory where your lightning weights you'd like to convert are stored")
-    parse.add_argument('--output_path', type=str, default=' /media/neuralmaster/9d5af100-a900-4e89-bab1-43c8b5025daf/neuromaster/MainImportant/MRES/tiaW/Masked-Auto-Encoder-for-Stereo-Depth-Estimation/data/tiawarner/weights/converted/', help="the directory where you'd like to store your new converted weights")
+    parse.add_argument('--input_path', type=str, default=' ../data/tiawarner/geico_and_nugen_mae_perceptual/gieco_and_nugen_mae_training_v2/train_outputs/sample-epoch=069-val_loss=0.66.ckpt', help="the directory where your lightning weights you'd like to convert are stored")
+    parse.add_argument('--output_path', type=str, default=' ../data/tiawarner/weights/converted/', help="the directory where you'd like to store your new converted weights")
     parse.add_argument('--output_filename', type=str, default='COCO_weights.pth', help="the name of the new weight file")
 
     args = parse.parse_args()

@@ -5,7 +5,7 @@ import shutil
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input_dir", type=str, default=" /media/neuralmaster/9d5af100-a900-4e89-bab1-43c8b5025daf/neuromaster/MainImportant/MRES/tiaW/Masked-Auto-Encoder-for-Stereo-Depth-Estimation/data/tiawarner", help="the input parent directory")
+    parser.add_argument("--input_dir", type=str, default=" ../data/tiawarner", help="the input parent directory")
 
     args = parser.parse_args()
     return args 

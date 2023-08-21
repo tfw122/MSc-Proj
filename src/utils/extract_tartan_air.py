@@ -3,8 +3,8 @@ import os
 import zipfile
 from tqdm import tqdm
 
-root_dir = "/data/stereo_data/tartan_air_og_full/tartan-air-dataset-og/tartan_air/tartanair_tools/outputs"
-output_dir = "/data/stereo_data/tartan_air_extracted"
+root_dir = "../data/stereo_data/tartan_air_og_full/tartan-air-dataset-og/tartan_air/tartanair_tools/outputs"
+output_dir = "../data/stereo_data/tartan_air_extracted"
 mode = "Hard" # can unpack "Easy" or "Hard"
 items = ["depth_left.zip", "image_left.zip", "image_right.zip"]
 extension = ".zip"

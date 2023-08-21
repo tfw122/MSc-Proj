@@ -24,7 +24,7 @@ from src.datasets.dataset_zoo.stereo_vision_downstream.base_stereo_dataset impor
 
 @registry.register_datamodule("middlebury_downstream")
 class Middlebury(StereoDataset):
-    def __init__(self, config, aug_params=None, root='/data/middlebury', split='train', sub_split='F'):
+    def __init__(self, config, aug_params=None, root='../data/middlebury', split='train', sub_split='F'):
         super(Middlebury, self).__init__(config, aug_params, sparse=True, reader=frame_utils.readDispMiddlebury)
         assert os.path.exists(root)
         assert sub_split in ["F", "H", "Q", "all", "2014"]
@@ -56,7 +56,7 @@ class Middlebury(StereoDataset):
 
 @registry.register_datamodule("middlebury_custom_downstream")
 class MiddleburyCustom(StereoDataset):
-    def __init__(self, config, aug_params=None, root='/data/MiddEval3', split='train', sub_split='all'):
+    def __init__(self, config, aug_params=None, root='../data/MiddEval3', split='train', sub_split='all'):
         super(MiddleburyCustom, self).__init__(config, aug_params, sparse=True, reader=frame_utils.readDispMiddlebury)
         assert os.path.exists(root)
         assert sub_split in ["F", "H", "Q", "all", "2014"]

@@ -591,7 +591,7 @@ class VITEncoderDownStream(BaseModel):
         else:
             self.device_count = len(self.gpu_device)
         
-        self.output_dir=  '/media/neuralmaster/9d5af100-a900-4e89-bab1-43c8b5025daf/neuromaster/MainImportant/MRES/tiaW/Masked-Auto-Encoder-for-Stereo-Depth-Estimation//data/{}/mae_out_test_{}_{}_{}'.format(self.config.user_config.s3key_prefix, self.dataset_config.dataset_name, self.model_config.loss_type, self.user_config.experiment_name)
+        self.output_dir=  '../data/{}/mae_out_test_{}_{}_{}'.format(self.config.user_config.s3key_prefix, self.dataset_config.dataset_name, self.model_config.loss_type, self.user_config.experiment_name)
         if os.path.exists(self.output_dir)!=True:
             os.makedirs(self.output_dir)
         

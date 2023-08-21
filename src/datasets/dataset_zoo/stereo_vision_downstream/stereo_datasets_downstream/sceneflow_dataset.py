@@ -29,7 +29,7 @@ class SceneFlowDatasetsClean(StereoDataset):
     monkaa no. of samples: 8664
     driving no. of samples: 4400
     """
-    def __init__(self, config, aug_params=None, root='/data/scene_flow', split='train', dstype='frames_cleanpass', things_test=False):
+    def __init__(self, config, aug_params=None, root='../data/scene_flow', split='train', dstype='frames_cleanpass', things_test=False):
         super(SceneFlowDatasetsClean, self).__init__(config, aug_params)
         self.config = config
         self.dataset_config = self.config.dataset_config
@@ -117,7 +117,7 @@ class SceneFlowDatasetsFinal(StereoDataset):
     monkaa no. of samples: 8664
     driving no. of samples: 4400
     """
-    def __init__(self, config, aug_params=None, root='/data/scene_flow', split='train', dstype='frames_finalpass', things_test=False):
+    def __init__(self, config, aug_params=None, root='../data/scene_flow', split='train', dstype='frames_finalpass', things_test=False):
         super(SceneFlowDatasetsFinal, self).__init__(config, aug_params)
         self.config = config
         self.dataset_config = self.config.dataset_config
