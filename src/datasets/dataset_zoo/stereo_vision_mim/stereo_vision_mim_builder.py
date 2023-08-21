@@ -20,7 +20,6 @@ class StereoVisionMaskedImageModellingDatasetModule(BaseDatasetBuilder):
     """
     def __init__(self, config):
         self.config= config
-        print(config)
         self.dataset_config = self.config.dataset_config
         # get the names;
         self.dataset_name = self.config.dataset_config.dataset_name
