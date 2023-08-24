@@ -27,6 +27,7 @@ class FallingThingsSingleLoader(Dataset):
         if split =='train':
             self.left_paths= self.left_paths[0: int(self.split_ratio*len(self.left_paths))]
             self.right_paths= self.right_paths[0: int(self.split_ratio*len(self.right_paths))]
+            print("fallingthings_data_process")
 
         elif split=='val' or split=='test':
             self.left_paths= self.left_paths[int(self.split_ratio*len(self.left_paths)): len(self.left_paths)]

@@ -23,6 +23,7 @@ class CityScapesLoader(Dataset):
         if split=='train':
             self.left_paths= sorted(glob('{}/cityscapes/leftImg8bit_sequence/train/**/*.png'.format(self.root_dir)))
             self.right_paths= sorted(glob('{}/cityscapes/rightImg8bit_sequence/train/**/*.png'.format(self.root_dir)))
+            print("cityscapes_data_process")
 
         elif split=='val':
             self.left_paths= sorted(glob('{}/cityscapes/leftImg8bit_sequence/val/**/*.png'.format(self.root_dir)))[0:1000]

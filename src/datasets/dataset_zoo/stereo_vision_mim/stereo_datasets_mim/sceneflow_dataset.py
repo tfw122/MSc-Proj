@@ -38,6 +38,7 @@ class SceneFlowLoader(Dataset):
             self.flying_things_left = sorted(glob('{}/flyingthings3d/{}/TRAIN/**/**/left/*.png'.format(self.root_dir, dstype)))
             # right frames;
             self.flying_things_right = sorted(glob('{}/flyingthings3d/{}/TRAIN/**/**/right/*.png'.format(self.root_dir, dstype)))
+            print("sceneflow_data_process")
             
         else:
             # TEST

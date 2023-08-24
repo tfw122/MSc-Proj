@@ -30,7 +30,8 @@ class SintelStereoLoader(Dataset):
             # split a sub sample of train data for val;
             self.left_paths= self.left_paths[0: int(self.split_ratio*len(self.left_paths))]
             self.right_paths= self.right_paths[0: int(self.split_ratio*len(self.right_paths))]
-        
+            print("sintel_data_process")
+            
         elif split=='val' or split=='test':
             # split a sub sample of train data for val;
             self.left_paths= self.left_paths[int(self.split_ratio*len(self.left_paths)): len(self.left_paths)]

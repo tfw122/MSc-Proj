@@ -21,7 +21,8 @@ class KittiEigenStereoLoader(Dataset):
 
         if split =='train':
             self.all_paths= np.load('src/datasets/db_utils/dataset_splits/kitti_eigen_splits/eigen_train_paths.npy')
-
+            print("kitti_data_process")
+            
         elif split=='val' or split=='test':
             self.all_paths= np.load('src/datasets/db_utils/dataset_splits/kitti_eigen_splits/eigen_val_paths.npy')
         #test is actually meant to be the eigen paths used for testing! i.e. same as in the eval.py file.
