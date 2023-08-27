@@ -48,10 +48,10 @@ class StereoVITEncoderDownStream(BaseModel):
         self.dataset_config =  self.config.dataset_config
         #self.gpu_device = self.config.trainer.params.gpu
         self.frequency_to_visualise = self.model_config.frequency_to_visualise
-        if self.gpu_device==-1:
-            self.device_count = torch.cuda.device_count()
-        else:
-            self.device_count = len(self.gpu_device)
+        #if self.gpu_device==-1:
+        #    self.device_count = torch.cuda.device_count()
+        #else:
+        #    self.device_count = len(self.gpu_device)
         
         self.image_out_dir= '{}/{}/{}_out_{}_{}'.format(self.config.user_config.save_root_dir, self.config.user_config.username_prefix, self.config.user_config.task_type, self.dataset_config.dataset_name, self.config.user_config.experiment_name)
         if os.path.exists(self.image_out_dir)!=True:

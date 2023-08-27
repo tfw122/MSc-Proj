@@ -585,11 +585,11 @@ class VITEncoderDownStream(BaseModel):
         self.dataset_config =  self.config.dataset_config
         self.transformer_params= self.model_config.transformer
         self.train_task = self.model_config.train_task
-        self.gpu_device = self.config.trainer.params.gpus
-        if self.gpu_device==-1:
-            self.device_count = torch.cuda.device_count()
-        else:
-            self.device_count = len(self.gpu_device)
+        #self.gpu_device = self.config.trainer.params.gpus
+        #if self.gpu_device==-1:
+        #    self.device_count = torch.cuda.device_count()
+        #else:
+        #    self.device_count = len(self.gpu_device)
         
         self.output_dir=  '../data/{}/mae_out_test_{}_{}_{}'.format(self.config.user_config.s3key_prefix, self.dataset_config.dataset_name, self.model_config.loss_type, self.user_config.experiment_name)
         if os.path.exists(self.output_dir)!=True:
