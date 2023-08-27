@@ -75,12 +75,12 @@ model_config:
   normalisation_params: imagenet  
   norm_layer_arg: partial
   mask_ratio: 0.75 # Masking ratio (percentage of removed patches).
-  loss_type: mae # mae, ssim, perceptual_and_style, gan, gan_perceptual
+  loss_type: perceptual_and_style # mae, ssim, perceptual_and_style, gan, gan_perceptual
   feature_extractor: vgg # only applicable for the perceptual loss; uses VGG16 as default
   gan_loss_type: style # std, ls, wgan, style (std i.e. OG GANs are notoriously unstable; use LS / WGAN instead), 
   norm_pix_loss: False # Use (per-patch) normalized pixels as targets for computing loss (NOT NEEDED though; works fine without)
   
-  finetune_imagenet: 'tiaW/data/imagenet_weights/vit_base_patch16_224.pth'
+  finetune_imagenet: null #'tiaW/data/imagenet_weights/vit_base_patch16_224.pth'
   # finetune using imagenet weights, arg= path to the local directory with imagenet weights 
   # make arg: null if you do not want to finetune; you will be pretraining from scratch (rand weights)
   # to use this; ensure pretrained weights from https://github.com/facebookresearch/mae
