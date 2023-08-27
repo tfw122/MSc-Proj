@@ -16,7 +16,7 @@ from torchvision.transforms import ColorJitter, functional, Compose
 import torch.nn.functional as F
 
 def get_middlebury_images():
-    root = "datasets/Middlebury/MiddEval3"
+    root = "datasets/Middlebury"
     with open(os.path.join(root, "official_train.txt"), 'r') as f:
         lines = f.read().splitlines()
     return sorted([os.path.join(root, 'trainingQ', f'{name}/im0.png') for name in lines])

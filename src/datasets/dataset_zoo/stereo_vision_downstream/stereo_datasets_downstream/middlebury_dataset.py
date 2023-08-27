@@ -35,11 +35,11 @@ class Middlebury(StereoDataset):
                     self.image_list += [ [str(scene / "im0.png"), str(scene / f"im1{s}.png")] ]
                     self.disparity_list += [ str(scene / "disp0.pfm") ]
         else:
-            lines = list(map(osp.basename, glob(os.path.join(root, "MiddEval3/trainingF/*"))))
-            lines = list(filter(lambda p: any(s in p.split('/') for s in Path(os.path.join(root, "MiddEval3/official_train.txt")).read_text().splitlines()), lines))
-            image1_list = sorted([os.path.join(root, "MiddEval3", f'training{sub_split}', f'{name}/im0.png') for name in lines])
-            image2_list = sorted([os.path.join(root, "MiddEval3", f'training{sub_split}', f'{name}/im1.png') for name in lines])
-            disp_list = sorted([os.path.join(root, "MiddEval3", f'training{sub_split}', f'{name}/disp0GT.pfm') for name in lines])
+            lines = list(map(osp.basename, glob(os.path.join(root, "trainingF/*"))))
+            lines = list(filter(lambda p: any(s in p.split('/') for s in Path(os.path.join(root, "official_train.txt")).read_text().splitlines()), lines))
+            image1_list = sorted([os.path.join(root,  f'training{sub_split}', f'{name}/im0.png') for name in lines])
+            image2_list = sorted([os.path.join(root, f'training{sub_split}', f'{name}/im1.png') for name in lines])
+            disp_list = sorted([os.path.join(root,  f'training{sub_split}', f'{name}/disp0GT.pfm') for name in lines])
             assert len(image1_list) == len(image2_list) == len(disp_list) > 0, [image1_list, sub_split]
         
             if split=='train':
@@ -56,7 +56,7 @@ class Middlebury(StereoDataset):
 
 @registry.register_datamodule("middlebury_custom_downstream")
 class MiddleburyCustom(StereoDataset):
-    def __init__(self, config, aug_params=None, root='../data/MiddEval3', split='train', sub_split='all'):
+    def __init__(self, config, aug_params=None, root='../data/middlebury', split='train', sub_split='all'):
         super(MiddleburyCustom, self).__init__(config, aug_params, sparse=True, reader=frame_utils.readDispMiddlebury)
         assert os.path.exists(root)
         assert sub_split in ["F", "H", "Q", "all", "2014"]
@@ -67,25 +67,25 @@ class MiddleburyCustom(StereoDataset):
                     self.image_list += [ [str(scene / "im0.png"), str(scene / f"im1{s}.png")] ]
                     self.disparity_list += [ str(scene / "disp0.pfm") ]
         else:
-            linesF = list(map(osp.basename, glob(os.path.join(root, "MiddEval3/trainingF/*"))))
+            linesF = list(map(osp.basename, glob(os.path.join(root, "trainingF/*"))))
             #linesF = list(filter(lambda p: any(s in p.split('/') for s in Path(os.path.join(root, "MiddEval3/official_train.txt")).read_text().splitlines()), linesF))
             
-            linesH = list(map(osp.basename, glob(os.path.join(root, "MiddEval3/trainingH/*"))))
+            linesH = list(map(osp.basename, glob(os.path.join(root, "trainingH/*"))))
             
-            linesQ = list(map(osp.basename, glob(os.path.join(root, "MiddEval3/trainingQ/*"))))
+            linesQ = list(map(osp.basename, glob(os.path.join(root, "trainingQ/*"))))
             
 
-            image1_listF = sorted([os.path.join(root, "MiddEval3", f'trainingF', f'{name}/im0.png') for name in linesF])
-            image1_listH = sorted([os.path.join(root, "MiddEval3", f'trainingH', f'{name}/im0.png') for name in linesH])
-            image1_listQ = sorted([os.path.join(root, "MiddEval3", f'trainingQ', f'{name}/im0.png') for name in linesQ])
+            image1_listF = sorted([os.path.join(root,  f'trainingF', f'{name}/im0.png') for name in linesF])
+            image1_listH = sorted([os.path.join(root,  f'trainingH', f'{name}/im0.png') for name in linesH])
+            image1_listQ = sorted([os.path.join(root, f'trainingQ', f'{name}/im0.png') for name in linesQ])
             
-            image2_listF = sorted([os.path.join(root, "MiddEval3", f'trainingF', f'{name}/im1.png') for name in linesF])
-            image2_listH = sorted([os.path.join(root, "MiddEval3", f'trainingH', f'{name}/im1.png') for name in linesH])
-            image2_listQ = sorted([os.path.join(root, "MiddEval3", f'trainingQ', f'{name}/im1.png') for name in linesQ])
+            image2_listF = sorted([os.path.join(root,  f'trainingF', f'{name}/im1.png') for name in linesF])
+            image2_listH = sorted([os.path.join(root, f'trainingH', f'{name}/im1.png') for name in linesH])
+            image2_listQ = sorted([os.path.join(root,  f'trainingQ', f'{name}/im1.png') for name in linesQ])
             
-            disp_listF = sorted([os.path.join(root, "MiddEval3", f'trainingF', f'{name}/disp0GT.pfm') for name in linesF])
-            disp_listH = sorted([os.path.join(root, "MiddEval3", f'trainingH', f'{name}/disp0GT.pfm') for name in linesH])
-            disp_listQ = sorted([os.path.join(root, "MiddEval3", f'trainingQ', f'{name}/disp0GT.pfm') for name in linesQ])
+            disp_listF = sorted([os.path.join(root,  f'trainingF', f'{name}/disp0GT.pfm') for name in linesF])
+            disp_listH = sorted([os.path.join(root,  f'trainingH', f'{name}/disp0GT.pfm') for name in linesH])
+            disp_listQ = sorted([os.path.join(root,  f'trainingQ', f'{name}/disp0GT.pfm') for name in linesQ])
 
             image1_list= image1_listF + image1_listH + image1_listQ
             image2_list= image2_listF + image2_listH + image2_listQ

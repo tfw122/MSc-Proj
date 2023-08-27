@@ -260,11 +260,11 @@ class Middlebury(StereoDataset):
         super(Middlebury, self).__init__(aug_params, sparse=True, reader=frame_utils.readDispMiddlebury)
         assert os.path.exists(root)
         assert split in "FHQ"
-        lines = list(map(osp.basename, glob(os.path.join(root, "MiddEval3/trainingF/*"))))
-        lines = list(filter(lambda p: any(s in p.split('/') for s in Path(os.path.join(root, "MiddEval3/official_train.txt")).read_text().splitlines()), lines))
-        image1_list = sorted([os.path.join(root, "MiddEval3", f'training{split}', f'{name}/im0.png') for name in lines])
-        image2_list = sorted([os.path.join(root, "MiddEval3", f'training{split}', f'{name}/im1.png') for name in lines])
-        disp_list = sorted([os.path.join(root, "MiddEval3", f'training{split}', f'{name}/disp0GT.pfm') for name in lines])
+        lines = list(map(osp.basename, glob(os.path.join(root, "trainingF/*"))))
+        lines = list(filter(lambda p: any(s in p.split('/') for s in Path(os.path.join(root, "official_train.txt")).read_text().splitlines()), lines))
+        image1_list = sorted([os.path.join(root,  f'training{split}', f'{name}/im0.png') for name in lines])
+        image2_list = sorted([os.path.join(root, f'training{split}', f'{name}/im1.png') for name in lines])
+        disp_list = sorted([os.path.join(root,  f'training{split}', f'{name}/disp0GT.pfm') for name in lines])
 
         assert len(image1_list) == len(image2_list) == len(disp_list) > 0, [image1_list, split]
         for img1, img2, disp in zip(image1_list, image2_list, disp_list):
