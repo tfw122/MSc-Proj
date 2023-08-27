@@ -121,7 +121,7 @@ class StereoDataset(data.Dataset):
 
 
 class SceneFlowDatasets(StereoDataset):
-    def __init__(self, aug_params=None, root='datasets', dstype='frames_cleanpass', things_test=False):
+    def __init__(self, aug_params=None, root='../data/scene_flow', dstype='frames_cleanpass', things_test=False):
         super(SceneFlowDatasets, self).__init__(aug_params)
         self.root = root
         self.dstype = dstype
@@ -183,7 +183,7 @@ class SceneFlowDatasets(StereoDataset):
 
 
 class ETH3D(StereoDataset):
-    def __init__(self, aug_params=None, root='datasets/ETH3D', split='training'):
+    def __init__(self, aug_params=None, root='../data/eth3d', split='training'):
         super(ETH3D, self).__init__(aug_params, sparse=True)
 
         image1_list = sorted( glob(osp.join(root, f'two_view_{split}/*/im0.png')) )
@@ -195,7 +195,7 @@ class ETH3D(StereoDataset):
             self.disparity_list += [ disp ]
 
 class SintelStereo(StereoDataset):
-    def __init__(self, aug_params=None, root='datasets/SintelStereo'):
+    def __init__(self, aug_params=None, root='../data/sintel_stereo'):
         super().__init__(aug_params, sparse=True, reader=frame_utils.readDispSintelStereo)
 
         image1_list = sorted( glob(osp.join(root, 'training/*_left/*/frame_*.png')) )
@@ -208,7 +208,7 @@ class SintelStereo(StereoDataset):
             self.disparity_list += [ disp ]
 
 class FallingThings(StereoDataset):
-    def __init__(self, aug_params=None, root='datasets/FallingThings'):
+    def __init__(self, aug_params=None, root='..data/falling_things'):
         super().__init__(aug_params, reader=frame_utils.readDispFallingThings)
         assert os.path.exists(root)
 
@@ -224,7 +224,7 @@ class FallingThings(StereoDataset):
             self.disparity_list += [ disp ]
 
 class TartanAir(StereoDataset):
-    def __init__(self, aug_params=None, root='datasets', keywords=[]):
+    def __init__(self, aug_params=None, root='data', keywords=[]):
         super().__init__(aug_params, reader=frame_utils.readDispTartanAir)
         assert os.path.exists(root)
 
@@ -242,7 +242,7 @@ class TartanAir(StereoDataset):
             self.disparity_list += [ disp ]
 
 class KITTI(StereoDataset):
-    def __init__(self, aug_params=None, root='datasets/KITTI', image_set='training'):
+    def __init__(self, aug_params=None, root='../data/kitti_data', image_set='training'):
         super(KITTI, self).__init__(aug_params, sparse=True, reader=frame_utils.readDispKITTI)
         assert os.path.exists(root)
 
@@ -256,7 +256,7 @@ class KITTI(StereoDataset):
 
 
 class Middlebury(StereoDataset):
-    def __init__(self, aug_params=None, root='datasets/Middlebury', split='F'):
+    def __init__(self, aug_params=None, root='../data/middlebury', split='F'):
         super(Middlebury, self).__init__(aug_params, sparse=True, reader=frame_utils.readDispMiddlebury)
         assert os.path.exists(root)
         assert split in "FHQ"
