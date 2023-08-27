@@ -82,7 +82,7 @@ trainer:
         #checkpoint_callback: true
         accumulate_grad_batches: 1
         #check_val_every_n_epoch: 1 # 2cd ~/Co000
-        val_check_interval: 2789 #6500 #6000 #12000
+        val_check_interval: 1992 #6500 #6000 #12000
         log_every_n_steps: 300 # 300
         enable_checkpointing: True
         strategy: ddp
