@@ -33,7 +33,7 @@ model_config:
   ckpt_monitor: val_loss
 
   # load pretrained models;
-  load_pretrained_mae: ../data/tiawarner/downstream4/mae_stereo_mim_perceptual/230824-210638/train_output/best-model-epoch=018-val_loss=0.52.ckpt
+  load_pretrained_mae: ../data/tiawarner/downstream4/mae_stereo_mim_perceptual/230824-210638/train_outputs/best-model-epoch=018-val_loss=0.52.ckpt
   load_imagenet_supervised: null
   load_pretrained_raft_decoder: null #/data/tiawarner/pretrained_raft/raftstereo-sceneflow.pth
 
