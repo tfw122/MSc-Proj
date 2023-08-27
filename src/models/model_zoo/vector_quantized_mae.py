@@ -191,12 +191,26 @@ class VQStereoMaskedImageAutoEncoder(BaseModel):
             aeloss_r, log_dict_ae_r = self.loss_fnc(qloss_right, x_right, xrec_right, optimizer_idx, self.global_step,
                                             last_layer=self.get_last_layer(), split="train")
 
+            disc_feedback_l, _ = self.loss_fnc(qloss_left, x_left, xrec_left, 1, self.global_step,
+                                        last_layer=self.get_last_layer(), split="train")
+        
+            disc_feedback_r, _ = self.loss_fnc(qloss_right, x_right, xrec_right, 1, self.global_step,
+                                        last_layer=self.get_last_layer(), split="train")
+            gen_loss = aeloss_l + aeloss_r + disc_feedback_l + disc_feedback_r
+
+            self.log("train/gen_loss", gen_loss, prog_bar=True, logger=True, on_step=True, on_epoch=True)
+            self.log_dict({"train/aeloss_left": aeloss_l, "train/aeloss_right": aeloss_r}, prog_bar=False, logger=True, on_step=True, on_epoch=True)
+            return gen_loss
+        
+            """ 
             aeloss = aeloss_l + aeloss_r
             log_dict_ae = log_dict_ae_l + log_dict_ae_r
             
             self.log("train/aeloss", aeloss, prog_bar=True, logger=True, on_step=True, on_epoch=True)
             self.log_dict(log_dict_ae, prog_bar=False, logger=True, on_step=True, on_epoch=True)
-            return aeloss
+            return aeloss 
+            
+            """
 
         if optimizer_idx == 1:
             # discriminator
