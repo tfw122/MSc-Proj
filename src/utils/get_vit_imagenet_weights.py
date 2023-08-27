@@ -51,7 +51,7 @@ supervised_model = timm.create_model('vit_base_patch16_224', pretrained=True)
 # Change patch embed weights if it is not square
 if patch_size[0]!=patch_size[1]:
     supervised_model.patch_embed = patch_embed
-save_dir = "/data/samyakhtukra/imagenet_weights"
+save_dir = "/data/tiawarner/imagenet_weights"
 if os.path.exists(save_dir)!=True:
     os.makedirs(save_dir)
     print("output save directory made: {}".format(save_dir))
