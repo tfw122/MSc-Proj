@@ -46,7 +46,7 @@ class StereoVITEncoderDownStream(BaseModel):
         self.config = config
         self.model_config = self.config.model_config
         self.dataset_config =  self.config.dataset_config
-        self.gpu_device = self.config.trainer.params.gpu
+        #self.gpu_device = self.config.trainer.params.gpu
         self.frequency_to_visualise = self.model_config.frequency_to_visualise
         if self.gpu_device==-1:
             self.device_count = torch.cuda.device_count()
