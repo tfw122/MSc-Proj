@@ -135,7 +135,7 @@ class SceneFlowDatasets(StereoDataset):
 
     def _add_things(self, split='TRAIN'):
         """ Add FlyingThings3D data """
-
+        print("SELF ADD THINGS !!!!!!! HERE!!!!!!!")
         original_length = len(self.disparity_list)
         root = osp.join(self.root, 'FlyingThings3D')
         left_images = sorted( glob(osp.join(root, self.dstype, split, '*/*/left/*.png')) )
@@ -154,7 +154,7 @@ class SceneFlowDatasets(StereoDataset):
 
     def _add_monkaa(self):
         """ Add FlyingThings3D data """
-
+        print("SELF ADD THINGS FLYING !!!!!!! HERE!!!!!!!")
         original_length = len(self.disparity_list)
         root = osp.join(self.root, 'Monkaa')
         left_images = sorted( glob(osp.join(root, self.dstype, '*/left/*.png')) )
@@ -169,7 +169,7 @@ class SceneFlowDatasets(StereoDataset):
 
     def _add_driving(self):
         """ Add FlyingThings3D data """
-
+        print("SELF ADD THINGS DRIVING!!!!!!! HERE!!!!!!!")
         original_length = len(self.disparity_list)
         root = osp.join(self.root, 'Driving')
         left_images = sorted( glob(osp.join(root, self.dstype, '*/*/*/left/*.png')) )
@@ -185,7 +185,7 @@ class SceneFlowDatasets(StereoDataset):
 class ETH3D(StereoDataset):
     def __init__(self, aug_params=None, root='../data/eth3d', split='training'):
         super(ETH3D, self).__init__(aug_params, sparse=True)
-
+        print("ETH3D !!!!!!! HERE!!!!!!!")
         image1_list = sorted( glob(osp.join(root, f'two_view_{split}/*/im0.png')) )
         image2_list = sorted( glob(osp.join(root, f'two_view_{split}/*/im1.png')) )
         disp_list = sorted( glob(osp.join(root, 'two_view_training_gt/*/disp0GT.pfm')) ) if split == 'training' else [osp.join(root, 'two_view_training_gt/playground_1l/disp0GT.pfm')]*len(image1_list)
@@ -197,7 +197,7 @@ class ETH3D(StereoDataset):
 class SintelStereo(StereoDataset):
     def __init__(self, aug_params=None, root='../data/sintel_stereo'):
         super().__init__(aug_params, sparse=True, reader=frame_utils.readDispSintelStereo)
-
+        print("SINTEL!!!!!!! HERE!!!!!!!")
         image1_list = sorted( glob(osp.join(root, 'training/*_left/*/frame_*.png')) )
         image2_list = sorted( glob(osp.join(root, 'training/*_right/*/frame_*.png')) )
         disp_list = sorted( glob(osp.join(root, 'training/disparities/*/frame_*.png')) ) * 2
@@ -208,7 +208,7 @@ class SintelStereo(StereoDataset):
             self.disparity_list += [ disp ]
 
 class FallingThings(StereoDataset):
-    def __init__(self, aug_params=None, root='..data/falling_things'):
+    def __init__(self, aug_params=None, root='../data/falling_things'):
         super().__init__(aug_params, reader=frame_utils.readDispFallingThings)
         assert os.path.exists(root)
 
@@ -224,7 +224,7 @@ class FallingThings(StereoDataset):
             self.disparity_list += [ disp ]
 
 class TartanAir(StereoDataset):
-    def __init__(self, aug_params=None, root='data', keywords=[]):
+    def __init__(self, aug_params=None, root='../data', keywords=[]):
         super().__init__(aug_params, reader=frame_utils.readDispTartanAir)
         assert os.path.exists(root)
 
