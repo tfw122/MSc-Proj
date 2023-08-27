@@ -80,6 +80,7 @@ model_config:
   gan_loss_type: style # std, ls, wgan, style (std i.e. OG GANs are notoriously unstable; use LS / WGAN instead), 
   norm_pix_loss: False # Use (per-patch) normalized pixels as targets for computing loss (NOT NEEDED though; works fine without)
   
+  ckpt_monitor: val_loss
   finetune_imagenet: null #'tiaW/data/imagenet_weights/vit_base_patch16_224.pth'
   # finetune using imagenet weights, arg= path to the local directory with imagenet weights 
   # make arg: null if you do not want to finetune; you will be pretraining from scratch (rand weights)
