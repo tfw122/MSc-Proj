@@ -19,7 +19,7 @@ training:
 
     # Size of the batch globally. If distributed or data_parallel
     # is used, this will be divided equally among GPUs
-    batch_size: 16 # 16 for mim, 8 for stereo
+    batch_size: 8 # 16 for mim, 8 for stereo
     # Number of workers to be used in dataloaders
     num_workers: 16
     # Use in multi-tasking, when you want to sample tasks proportional to their sizes
@@ -72,7 +72,7 @@ trainer:
         #accelerator: gpu
         num_nodes: 1
         #devices: 0
-        precision: 32 # for Downstream = 16 for MIM = 32.
+        precision: 16 # for Downstream = 16 for MIM = 32.
         deterministic: false
         benchmark: false
         max_steps: -1
