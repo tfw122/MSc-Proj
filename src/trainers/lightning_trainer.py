@@ -127,11 +127,11 @@ class LightningTrainer(BaseTrainer):
         else:
             self.tb_writer = TensorBoardLogger('{}/tensorboard_logs/'.format(self.log_dir), name=self.config.user_config.experiment_name)
 
-    #def load_datasets(self) -> None:
-    #    logger.info("Loading Datasets")
-    #    self.train_loader = self.data_module.train_dataloader()
-    #    self.test_loader = self.data_module.test_dataloader()
-    #    self.val_loader = self.data_module.val_dataloader()
+    def load_datasets(self) -> None:
+        logger.info("Loading Datasets")
+        self.train_loader = self.data_module.train_dataloader()
+        self.test_loader = self.data_module.test_dataloader()
+        self.val_loader = self.data_module.val_dataloader()
 
     def train(self) -> None:
         logger.info("===== Model =====")
