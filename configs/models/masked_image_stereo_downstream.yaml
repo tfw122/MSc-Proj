@@ -40,4 +40,4 @@ model_config:
   frequency_to_visualise: 2000
   # Downstream training ckpt:
   load_ckpt_model_only: null #../data/tiawarner/pretrained_downstream/sample-epoch=054-val_loss=272.88.ckpt
-  load_checkpoint: null
+  load_checkpoint: ../data/tiawarner/downstream4/mae_stereo_mim_perceptual/230828-191418/train_outputs/N-Step-Checkpoint_005_36257.ckpt
