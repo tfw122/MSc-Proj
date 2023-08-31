@@ -381,8 +381,9 @@ class MultiScaleMaskedImageAutoEncoder(BaseModel):
 
     def training_step(self, batch, batch_idx, optimizer_idx):
         x_left, x_right = batch['left_image'], batch['right_image']
+        x = torch.cat((x_left, x_right), dim=1)
 
-        out, mask, scaled_images = self(x_left, x_right)
+        out, mask, scaled_images = self(x, x)
     
         for i in range(x.size(2)):
             # imgs, pred, mask
@@ -827,7 +828,7 @@ class VITEncoderDownStream(BaseModel):
             pad_mask=None
         else:
             x, pad_mask, y = batch['images'], batch['pad_mask'], batch['labels']
-            claim_id = data['claim_id']
+            claim_id = batch['claim_id']
             y = y.squeeze(1)
 
         # get the output types;
