@@ -295,8 +295,14 @@ class SparseFlowAugmentor:
         print("img1 width:", img1.shape[1])
         print("crop width:", self.crop_size[1])
 
+        low_value = -margin_x
+        high_value = img1.shape[1] - self.crop_size[1] + margin_x
+
+        x0 = np.random.randint(max(low_value, 0), max(high_value, low_value + 1))
+
+
         y0 = np.random.randint(0, img1.shape[0] - self.crop_size[0] + margin_y)
-        x0 = np.random.randint(-margin_x, img1.shape[1] - self.crop_size[1] + margin_x)
+        #x0 = np.random.randint(-margin_x, img1.shape[1] - self.crop_size[1] + margin_x)
 
         y0 = np.clip(y0, 0, img1.shape[0] - self.crop_size[0])
         x0 = np.clip(x0, 0, img1.shape[1] - self.crop_size[1])
