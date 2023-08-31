@@ -85,7 +85,7 @@ class BaseDatasetBuilder(pl.LightningDataModule):
                                            drop_last=True)
     
     def val_dataloader(self):
-        val_dataset = self.data_setup('val')
+        val_dataset = self.data_setup('test')
         print('total Validation sample #: {}'.format(len(val_dataset)))
         return torch.utils.data.DataLoader(val_dataset, 
                                            batch_size=int(self.config.training.batch_size), 
@@ -95,7 +95,7 @@ class BaseDatasetBuilder(pl.LightningDataModule):
                                            drop_last=True)
 
     def test_dataloader(self):
-        test_dataset = self.data_setup('test')
+        test_dataset = self.data_setup('val')
         print('total Testing sample #: {}'.format(len(test_dataset)))
         return torch.utils.data.DataLoader(test_dataset, 
                                            batch_size=int(self.config.training.batch_size), 

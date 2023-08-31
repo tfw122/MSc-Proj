@@ -21,7 +21,8 @@ from src.models.modules.pos_embeds import *
 from src.models.base_model import BaseModel
 from src.models.modules.image_encoder import *
 from src.models.modules.masked_vision_layers import *
-from src.models.modules.discriminators import Discriminator, MSGDiscriminator
+from src.models.modules.discriminators import Discriminator as discriminator
+from src.models.modules.discriminators import MSGDiscriminator as discriminator
 from src.common.registry import registry
 from src.models.modules.layer_utils import *
 from src.losses.image_reconstruction import MaskedImageLoss, scale_pyramid
@@ -505,7 +506,6 @@ class MultiScaleMaskedImageAutoEncoder(BaseModel):
         warmup_epochs=20
         betas= (0.9, 0.95)
 
-        # following timm: set wd as 0 for bias and norm layers
         #param_groups = optim_factory.add_weight_decay(self, weight_decay) # weight_decay;
         optimizer_gen = torch.optim.Adam(self.generator.parameters(), lr=blr, betas=betas)
         optimizer_disc = torch.optim.Adam(self.discriminator.parameters(), lr=blr, betas=betas)

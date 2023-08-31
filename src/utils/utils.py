@@ -29,7 +29,7 @@ def load_yaml(config_path):
 
 def save_config(config, path, bucket):
     primitive = OmegaConf.to_container(config)
-    upload_to_s3(path, primitive, bucket)
+    #upload_to_s3(path, primitive, bucket)
     #with open(path, 'w') as yaml_file:
     #    yaml.dump(primitive, yaml_file, default_flow_style=False)
     #OmegaConf.save(config, f=path)

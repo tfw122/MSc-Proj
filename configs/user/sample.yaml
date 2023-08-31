@@ -6,7 +6,7 @@ user_config:
   # ------------------- RUN ARGS -------------------
   # Name of the experiment, will be used while saving checkpoints
   # and generating reports
-  experiment_name:  mae_stereo_mim_perceptual #stereo_downstream_perceptual_all
+  experiment_name:  stereo_downstream_perceptual #stereo_downstream_perceptual_all
   task_type: downstream4
 
   # # ------------------- S3 ARGS -------------------
