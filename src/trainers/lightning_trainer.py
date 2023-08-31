@@ -25,7 +25,7 @@ class LightningTrainer(BaseTrainer):
         super().__init__()
         self.config = config
         self.user_config = self.config.user_config
-        #self.automatic_optimization = False
+        self.automatic_optimization = True
 
         self.fileio = fileio
 

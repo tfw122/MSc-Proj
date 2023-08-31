@@ -40,7 +40,7 @@ class VQStereoMaskedImageAutoEncoder(BaseModel):
     def __init__(self, config):
         super().__init__()
         print('for this work well, make sure inputs are not normalised!')
-        #self.automatic_optimization = False
+        self.automatic_optimization = True
         self.config = config
         self.model_config = self.config.model_config
         self.vq_config = self.model_config.vector_quantizer
