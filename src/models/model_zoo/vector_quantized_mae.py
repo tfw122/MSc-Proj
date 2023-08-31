@@ -321,7 +321,7 @@ class VQStereoMaskedImageAutoEncoder(BaseModel):
         warmup_epochs=20
         betas= (0.9, 0.95)
 
-        shared_params = set(self.patch.embed.parameters()).union(self.norm_layer.parameters())
+        shared_params = set(self.patch_embed.parameters()).union(self.norm_layer.parameters())
         encoder_params = set(self.encoder.parameters()) -  shared_params
         decoder_params = set(self.decoder.parameters()) -  shared_params
         opt_ae_params = list(shared_params) + list(encoder_params) + list(decoder_params) + list(self.quantize.parameters()) + list(self.quant_conv.parameters()) + list(self.post_quant_conv.parameters())
