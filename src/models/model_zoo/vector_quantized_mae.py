@@ -311,6 +311,11 @@ class VQStereoMaskedImageAutoEncoder(BaseModel):
                                     lr=blr, betas=(0.5, 0.9))
         
         #scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=30, gamma=0.9) #build_scheduler(optimizer, self.config)
+        all_params = [id(p) for group in opt_ae.param_groups for p in group['params']]
+        
+        if len(all_params) != len(set(all_params)):
+            print("There are duplicate parameters in opt_ae")
+
         return [opt_ae, opt_disc], []
 
     # --------------- helper functions ----------------
