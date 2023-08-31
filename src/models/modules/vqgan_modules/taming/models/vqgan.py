@@ -25,7 +25,7 @@ class VQModel(pl.LightningModule):
                  ):
         super().__init__()
         self.image_key = image_key
-        self.automatic_optimization = False
+        #self.automatic_optimization = False
         self.encoder = Encoder(**ddconfig)
         self.decoder = Decoder(**ddconfig)
         self.loss = instantiate_from_config(lossconfig)

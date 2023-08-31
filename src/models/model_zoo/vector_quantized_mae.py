@@ -240,6 +240,7 @@ class VQStereoMaskedImageAutoEncoder(BaseModel):
             self.log_dict(log_dict_disc, prog_bar=False, logger=True, on_step=True, on_epoch=True)
 
             return discloss
+        
     def validation_step(self, batch, batch_idx):
         x_left, x_right = batch['left_image'], batch['right_image']
 
