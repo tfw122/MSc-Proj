@@ -314,19 +314,27 @@ class VQStereoMaskedImageAutoEncoder(BaseModel):
             if len(sources) > 1:
                 print(f"Parameter {param_id} is shared between: {', '.join(sources)}")
 
-    # Your optimizer setup remains unchanged below
+
         weight_decay=0.05
         blr= 4.5e-6
         min_lr = 0.
         warmup_epochs=20
         betas= (0.9, 0.95)
 
-        opt_ae = torch.optim.Adam(list(self.encoder.parameters())+
-                                  list(self.decoder.parameters())+
-                                  list(self.quantize.parameters())+
-                                  list(self.quant_conv.parameters())+
-                                  list(self.post_quant_conv.parameters()),
-                                  lr=blr, betas=(0.5, 0.9))
+        shared_params = set(self.patch.embed.parameters()).union(self.norm_layer.parameters())
+        encoder_params = set(self.encoder.parameters()) -  shared_params
+        decoder_params = set(self.decoder.parameters()) -  shared_params
+        opt_ae_params = list(shared_params) + list(encoder_params) + list(decoder_params) + list(self.quantize.parameters()) + list(self.quant_conv.parameters()) + list(self.post_quant_conv.parameters())
+        
+
+
+        opt_ae = torch.optim.Adam(opt_ae_params, lr = blr, betas = (0.5, 0.9))
+        #opt_ae = torch.optim.Adam(list(self.encoder.parameters())+
+        #                          list(self.decoder.parameters())+
+        #                          list(self.quantize.parameters())+
+        #                          list(self.quant_conv.parameters())+
+        #                          list(self.post_quant_conv.parameters()),
+        #                          lr=blr, betas=(0.5, 0.9))
         
         opt_disc = torch.optim.Adam(self.loss_fnc.discriminator.parameters(),
                                     lr=blr, betas=(0.5, 0.9))
