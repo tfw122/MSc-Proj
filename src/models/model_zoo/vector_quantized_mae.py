@@ -299,7 +299,14 @@ class VQStereoMaskedImageAutoEncoder(BaseModel):
                                   list(self.quant_conv.parameters())+
                                   list(self.post_quant_conv.parameters()),
                                   lr=blr, betas=(0.5, 0.9))
-        
+        print(f"Encoder params: {sum(p.numel() for p in self.encoder.parameters())}")
+        print(f"Decoder params: {sum(p.numel() for p in self.decoder.parameters())}")
+
+        print(f"Quantize params: {sum(p.numel() for p in self.quantize.parameters())}")
+        print(f"Quant Conv params: {sum(p.numel() for p in self.quant_conv.parameters())}")
+        print(f"Post Quant Conv params: {sum(p.numel() for p in self.post_quant_conv.parameters())}")
+
+
         opt_disc = torch.optim.Adam(self.loss_fnc.discriminator.parameters(),
                                     lr=blr, betas=(0.5, 0.9))
         
