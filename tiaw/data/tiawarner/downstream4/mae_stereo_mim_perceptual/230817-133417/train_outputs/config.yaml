@@ -1,0 +1,150 @@
+config_version: 1.0
+user_config:
+  save_locally: true
+  save_root_dir: tiaw/data
+  experiment_name: mae_stereo_mim_perceptual
+  task_type: downstream4
+  data_dir: tiaW/data
+  username_prefix: tiawarner
+  aws_key_region: us-east
+  data_bucket_region: eu-central-1
+  image_bucket_region: eu-central-1
+  image_bucket_name: tractable-images-tmnf
+training:
+  trainer: lightning
+  seed: -1
+  batch_size: 16
+  num_workers: 16
+  dataset_size_proportional_sampling: true
+  pin_memory: false
+  persistent_workers: true
+  test_device: cuda:2
+  local_rank: null
+  verbose_dump: false
+  find_unused_parameters: false
+  callbacks:
+  - type: CheckpointEveryNSteps
+    params:
+      save_step_frequency: 2789
+      prefix: N-Step-Checkpoint
+      use_modelcheckpoint_filename: false
+trainer:
+  type: lightning
+  params:
+    gpus: -1
+    tpu_cores: null
+    num_nodes: 1
+    precision: 32
+    deterministic: false
+    benchmark: false
+    max_steps: -1
+    max_epochs: -1
+    gradient_clip_val: 1.0
+    num_sanity_val_steps: 0
+    accumulate_grad_batches: 1
+    val_check_interval: 2789
+    log_every_n_steps: 300
+    enable_checkpointing: true
+    strategy: ddp
+    enable_progress_bar: true
+    gradient_clip_algorithm: norm
+model_config:
+  name: masked_image_autoencoder
+  image_encoder:
+    patch_size:
+    - 16
+    - 32
+    in_channels: 3
+    embed_dim: 768
+    depth: 12
+    mlp_ratio: 4
+    num_heads: 12
+  image_decoder:
+    decoder_embed_dim: 512
+    decoder_depth: 8
+    decoder_num_heads: 16
+  image_loss_weightings:
+    ssim: 0.85
+    style: 40.0
+    perc: 0.05
+    gan: 0.7
+    l1: 1.0
+  discriminator:
+    depth: 6
+    conv_layer_type: default
+    feature_size_ndf: 512
+    input_channels_nc: 3
+    gan_arch_type: msg
+  dall_e:
+    model_dir: /tiaW/data/pretrained_perceptual/dall_e
+  normalisation_params: imagenet
+  norm_layer_arg: partial
+  mask_ratio: 0.75
+  loss_type: perceptual
+  feature_extractor: vgg
+  norm_pix_loss: false
+  ckpt_monitor: val_loss
+  finetune_imagenet: null
+  num_samples_to_visualise: 1
+  frequency_to_visualise: 6000
+  load_checkpoint: null
+dataset_config:
+  dataset_name: stereo_mim
+  dataset_builder: stereo_vision_mim
+  root_dir: /media/neuralmaster/9d5af100-a900-4e89-bab1-43c8b5025daf/neuromaster/MainImportant/MRES/tiaW/data
+  dataset_mode:
+    image_type: mixed
+    individual_name: null
+    dataset_classes:
+    - cityscapes_mim
+    - kitti_custom_mim
+    - falling_things_single_mim
+    - falling_things_mixed_mim
+    - sceneflow_cleanpass_mim
+    - sceneflow_finalpass_mim
+  db_split_ratio: 0.997
+  preprocess:
+    name: vision
+    vision_transforms:
+      transforms_train:
+      - Resize
+      - RandomHorizontalFlip
+      - ToTensor
+      - RandomAugment
+      transforms_test:
+      - Resize
+      - ToTensor
+      params:
+        Resize:
+          size:
+          - 224
+          - 448
+        RandomRotation:
+          degrees:
+          - 20
+          - 180
+        RandomAffine:
+          degrees:
+          - 20
+          - 180
+        RandomPerspective: null
+        RandomHorizontalFlip: null
+        Solarize:
+          version: torch
+          threshold: 192.0
+          do_augmentation: true
+        GaussianBlur:
+          do_augmentation: true
+          sigma:
+          - 0.1
+          - 2.0
+        ToTensor: null
+        RandomAugment:
+          augment_parameters:
+          - 0.8
+          - 1.2
+          - 0.5
+          - 2.0
+          - 0.8
+          - 1.2
+          do_augmentation: true
