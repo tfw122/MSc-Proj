@@ -40,6 +40,7 @@ class VQStereoMaskedImageAutoEncoder(BaseModel):
     def __init__(self, config):
         super().__init__()
         print('for this work well, make sure inputs are not normalised!')
+        self.automatic_optimization = False
         self.config = config
         self.model_config = self.config.model_config
         self.vq_config = self.model_config.vector_quantizer
@@ -198,9 +199,13 @@ class VQStereoMaskedImageAutoEncoder(BaseModel):
                                         last_layer=self.get_last_layer(), split="train")
             gen_loss = aeloss_l + aeloss_r + disc_feedback_l + disc_feedback_r
 
+            opt_ae = self.optimizers()[0]
+            opt_ae.zero_grad()
+            gen_loss.backward()
+            opt_ae.step()
             self.log("train/gen_loss", gen_loss, prog_bar=True, logger=True, on_step=True, on_epoch=True)
             self.log_dict({"train/aeloss_left": aeloss_l, "train/aeloss_right": aeloss_r}, prog_bar=False, logger=True, on_step=True, on_epoch=True)
-            return gen_loss
+            #return gen_loss
         
             """ 
             aeloss = aeloss_l + aeloss_r
@@ -212,7 +217,7 @@ class VQStereoMaskedImageAutoEncoder(BaseModel):
             
             """
 
-        if optimizer_idx == 1:
+        elif optimizer_idx == 1:
             # discriminator
             discloss_l, log_dict_disc_l = self.loss_fnc(qloss_left, x_left, xrec_left, optimizer_idx, self.global_step,
                                             last_layer=self.get_last_layer(), split="train")
@@ -223,10 +228,16 @@ class VQStereoMaskedImageAutoEncoder(BaseModel):
             discloss = discloss_l + discloss_r
             log_dict_disc = log_dict_disc_l + log_dict_disc_r
 
+            
+            opt_disc = self.optimizers()[1]
+            opt_disc.zero_grad()
+            discloss.backward()
+            opt_disc.step()
+            #return discloss
+
+
             self.log("train/discloss", discloss, prog_bar=True, logger=True, on_step=True, on_epoch=True)
             self.log_dict(log_dict_disc, prog_bar=False, logger=True, on_step=True, on_epoch=True)
-            return discloss
-
     def validation_step(self, batch, batch_idx):
         x_left, x_right = batch['left_image'], batch['right_image']
 
