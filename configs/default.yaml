@@ -91,7 +91,7 @@ trainer:
         # set to 0 if you want progress bar to be turned off
         enable_progress_bar: True #100
         gradient_clip_algorithm: norm
-        gradient_clip_val: 1.0 # if 0; disables gradient clipping, set 1.0 for RAFT downstream training
+        gradient_clip_val: 0.0 # if 0; disables gradient clipping, set 1.0 for RAFT downstream training
 
 
 # Configuration for models, default configuration files for various models
