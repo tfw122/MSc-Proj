@@ -287,6 +287,34 @@ class VQStereoMaskedImageAutoEncoder(BaseModel):
         """
         Configure and load optimizers here.
         """
+        def get_param_ids(model_component, component_name):
+        
+            return {id(p): component_name for p in model_component.parameters()}
+
+        # Get unique IDs for each model component's parameters
+        param_sources = {
+            'encoder': get_param_ids(self.encoder, 'encoder'),
+            'decoder': get_param_ids(self.decoder, 'decoder'),
+            'quantize': get_param_ids(self.quantize, 'quantize'),
+            'quant_conv': get_param_ids(self.quant_conv, 'quant_conv'),
+            'post_quant_conv': get_param_ids(self.post_quant_conv, 'post_quant_conv')
+            }
+
+        # Combine the IDs into a single dictionary
+        combined_param_ids = {}
+        for source, param_id_dict in param_sources.items():
+            for param_id, component_name in param_id_dict.items():
+                if param_id in combined_param_ids:
+                    combined_param_ids[param_id].append(component_name)
+                else:
+                    combined_param_ids[param_id] = [component_name]
+
+        # Check for shared parameters
+        for param_id, sources in combined_param_ids.items():
+            if len(sources) > 1:
+                print(f"Parameter {param_id} is shared between: {', '.join(sources)}")
+
+    # Your optimizer setup remains unchanged below
         weight_decay=0.05
         blr= 4.5e-6
         min_lr = 0.
@@ -299,14 +327,7 @@ class VQStereoMaskedImageAutoEncoder(BaseModel):
                                   list(self.quant_conv.parameters())+
                                   list(self.post_quant_conv.parameters()),
                                   lr=blr, betas=(0.5, 0.9))
-        print(f"Encoder params: {sum(p.numel() for p in self.encoder.parameters())}")
-        print(f"Decoder params: {sum(p.numel() for p in self.decoder.parameters())}")
-
-        print(f"Quantize params: {sum(p.numel() for p in self.quantize.parameters())}")
-        print(f"Quant Conv params: {sum(p.numel() for p in self.quant_conv.parameters())}")
-        print(f"Post Quant Conv params: {sum(p.numel() for p in self.post_quant_conv.parameters())}")
-
-
+        
         opt_disc = torch.optim.Adam(self.loss_fnc.discriminator.parameters(),
                                     lr=blr, betas=(0.5, 0.9))
         
@@ -316,13 +337,17 @@ class VQStereoMaskedImageAutoEncoder(BaseModel):
         if len(all_params) != len(set(all_params)):
             print("There are duplicate parameters in opt_ae")
 
+        
         return [opt_ae, opt_disc], []
+    
 
     # --------------- helper functions ----------------
     #def on_train_epoch_start(self):
     #    if self.current_epoch==0:
     #        sample_input= torch.randn((8,3,10,224,224))
     #        self.logger.experiment.add_graph(MaskedImageAutoEncoder(self.config),sample_input)
+
+
 
     def get_last_layer(self):
         return self.decoder.decoder_blocks[7].mlp.fc2.weight
