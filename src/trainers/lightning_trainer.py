@@ -25,7 +25,6 @@ class LightningTrainer(BaseTrainer):
         super().__init__()
         self.config = config
         self.user_config = self.config.user_config
-        self.automatic_optimization = True
 
         self.fileio = fileio
 
@@ -80,11 +79,8 @@ class LightningTrainer(BaseTrainer):
 
         lightning_params_dict = OmegaConf.to_container(lightning_params, resolve=True)
         # max epochs specified in trainer_config;
-        if 'gpu' in lightning_params_dict:
-            lightning_params_dict.pop('gpu')
-        if 'tpu_cores' in lightning_params_dict:
-            lightning_params_dict.pop('tpu_cores')
-        self.trainer = Trainer(default_root_dir=self.log_dir,
+        self.trainer = Trainer(resume_from_checkpoint=self.resume_from_checkpoint,
+                                default_root_dir=self.log_dir,
                                 logger= self.tb_writer,
                                 callbacks= [self.checkpoint_callback, self.batch_checkpoint_callback], #[[]]+self.callbacks_list][0]
                                 **lightning_params_dict,
@@ -96,10 +92,9 @@ class LightningTrainer(BaseTrainer):
         # saves a file like: my/path/sample-mnist-epoch=02-val_loss=0.32.ckpt
         self.checkpoint_callback = ModelCheckpoint(
             monitor=self.config.model_config.ckpt_monitor,
-            save_top_k=1,
-            mode = 'min',
+            save_top_k=-1,
             dirpath=self.log_dir,
-            filename="best-model-{epoch:03d}-{val_loss:.2f}",
+            filename="sample-{epoch:03d}-{val_loss:.2f}",
             every_n_epochs=1,
             save_on_train_epoch_end=True,
         )
@@ -127,11 +122,11 @@ class LightningTrainer(BaseTrainer):
         else:
             self.tb_writer = TensorBoardLogger('{}/tensorboard_logs/'.format(self.log_dir), name=self.config.user_config.experiment_name)
 
-    def load_datasets(self) -> None:
-        logger.info("Loading Datasets")
-        self.train_loader = self.data_module.train_dataloader()
-        self.test_loader = self.data_module.test_dataloader()
-        self.val_loader = self.data_module.val_dataloader()
+    #def load_datasets(self) -> None:
+    #    logger.info("Loading Datasets")
+    #    self.train_loader = self.data_module.train_dataloader()
+    #    self.test_loader = self.data_module.test_dataloader()
+    #    self.val_loader = self.data_module.val_dataloader()
 
     def train(self) -> None:
         logger.info("===== Model =====")
