@@ -175,8 +175,6 @@ class FlowAugmentor:
         img1, img2 = self.eraser_transform(img1, img2)
         img1, img2, flow = self.spatial_transform(img1, img2, flow)
 
-        if img1
-
         img1 = np.ascontiguousarray(img1)
         img2 = np.ascontiguousarray(img2)
         flow = np.ascontiguousarray(flow)
