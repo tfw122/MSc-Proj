@@ -33,7 +33,7 @@ model_config:
     # for single scale; architecture is set (similar to DC GAN). Change arh gan_arch_type to ensure loss functions run correctly.
 
   dall_e:
-    model_dir: /tiaW/data/pretrained_perceptual/dall_e
+    model_dir: ../data/pretrained_perceptual/dall_e
     # if model weights not stored; use the following link to store: 
     # https://cdn.openai.com/dall-e/decoder.pkl
     # https://cdn.openai.com/dall-e/encoder.pkl
