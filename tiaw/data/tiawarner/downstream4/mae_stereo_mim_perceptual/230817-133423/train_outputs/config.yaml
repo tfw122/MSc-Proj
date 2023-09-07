@@ -32,7 +32,7 @@ trainer:
   type: lightning
   params:
     gpus: -1
-    tpu_cores: null
+    #tpu_cores: null
     num_nodes: 1
     precision: 32
     deterministic: false

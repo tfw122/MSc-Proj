@@ -31,7 +31,7 @@ training:
 trainer:
   type: lightning
   params:
-    tpu_cores: null
+   # tpu_cores: null
     accelerator: gpu
     num_nodes: 1
     devices: 0
