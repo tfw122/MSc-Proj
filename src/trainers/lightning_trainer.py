@@ -45,7 +45,7 @@ class LightningTrainer(BaseTrainer):
         # save config and create a directory to save output ckpts;
         self.fileio.save_config(self.config, self.log_dir)
 
-        self.resume_from_checkpoint = None
+        #self.resume_from_checkpoint = None
 
         self.data_module = data_module
 
@@ -79,13 +79,12 @@ class LightningTrainer(BaseTrainer):
 
         lightning_params_dict = OmegaConf.to_container(lightning_params, resolve=True)
         # max epochs specified in trainer_config;
-        self.trainer = Trainer(resume_from_checkpoint=self.resume_from_checkpoint,
-                                default_root_dir=self.log_dir,
+        self.trainer = Trainer(default_root_dir=self.log_dir,
                                 logger= self.tb_writer,
                                 callbacks= [self.checkpoint_callback, self.batch_checkpoint_callback], #[[]]+self.callbacks_list][0]
                                 **lightning_params_dict,
                             )
-
+        #resume_from_checkpoint=self.resume_from_checkpoint,
     def load_checkpoints(self) -> None:
         iter_save_frequence = self.filter_callback(self.config.training.callbacks)
 
