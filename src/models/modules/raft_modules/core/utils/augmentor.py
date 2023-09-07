@@ -175,7 +175,7 @@ class FlowAugmentor:
         img1, img2 = self.eraser_transform(img1, img2)
         img1, img2, flow = self.spatial_transform(img1, img2, flow)
 
-        if img1.dtype == '|O' or img1.shape == (1, 1) or img2.dtype == '|O' or img2.shape == (1, 1) or flow.dtype == '|O' or flow.shape == (1, 1):
+        if img1 is None or img2 is None or flow is None:
             pass
 
         else:
@@ -344,7 +344,8 @@ class SparseFlowAugmentor:
         img1, img2 = self.eraser_transform(img1, img2)
         img1, img2, flow, valid = self.spatial_transform(img1, img2, flow, valid)
 
-        if img1.dtype == '|O' or img1.shape == (1, 1) or img2.dtype == '|O' or img2.shape == (1, 1) or flow.dtype == '|O' or flow.shape == (1, 1) or valid.dtype == '|O' or valid.shape == (1, 1):
+
+        if img1 is None or img2 is None or flow is None or valid is None:
             pass
         else:
 
