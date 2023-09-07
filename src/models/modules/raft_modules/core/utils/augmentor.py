@@ -175,9 +175,12 @@ class FlowAugmentor:
         img1, img2 = self.eraser_transform(img1, img2)
         img1, img2, flow = self.spatial_transform(img1, img2, flow)
 
+        if img1
+
         img1 = np.ascontiguousarray(img1)
         img2 = np.ascontiguousarray(img2)
         flow = np.ascontiguousarray(flow)
+        
 
         return img1, img2, flow
 
@@ -324,6 +327,13 @@ class SparseFlowAugmentor:
         img2 = img2[y0:y0+self.crop_size[0], x0:x0+self.crop_size[1]]
         flow = flow[y0:y0+self.crop_size[0], x0:x0+self.crop_size[1]]
         valid = valid[y0:y0+self.crop_size[0], x0:x0+self.crop_size[1]]
+
+        print("img1 shape", img1.shape)
+        print("img2 shape", img2.shape)
+        print("flow shape", flow.shape)
+        print("valid shape", valid.shape)
+        
+        
         return img1, img2, flow, valid
 
 
