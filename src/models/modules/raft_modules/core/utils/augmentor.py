@@ -311,7 +311,7 @@ class SparseFlowAugmentor:
 
         if high <= low:
             # Handle the invalid case: You can return default values, modify high/low to be valid, or skip the sample.
-            return None, None, None, None
+            pass
         else:
             x0 = np.random.randint(low, high)
 
