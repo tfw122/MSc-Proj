@@ -301,6 +301,7 @@ class SparseFlowAugmentor:
         img2 = img2[y0:y0+self.crop_size[0], x0:x0+self.crop_size[1]]
         flow = flow[y0:y0+self.crop_size[0], x0:x0+self.crop_size[1]]
         valid = valid[y0:y0+self.crop_size[0], x0:x0+self.crop_size[1]]
+        print('HERE')
         return img1, img2, flow, valid
 
 
@@ -308,10 +309,15 @@ class SparseFlowAugmentor:
         img1, img2 = self.color_transform(img1, img2)
         img1, img2 = self.eraser_transform(img1, img2)
         img1, img2, flow, valid = self.spatial_transform(img1, img2, flow, valid)
+        
+        if img1.dtype == '|O' or img1.shape == (1, 1) or img2.dtype == '|O' or img2.shape == (1, 1) or flow.dtype == '|O' or flow.shape == (1, 1):
+            pass
 
-        img1 = np.ascontiguousarray(img1)
-        img2 = np.ascontiguousarray(img2)
-        flow = np.ascontiguousarray(flow)
-        valid = np.ascontiguousarray(valid)
+        else:
 
-        return img1, img2, flow, valid
+            img1 = np.ascontiguousarray(img1)
+            img2 = np.ascontiguousarray(img2)
+            flow = np.ascontiguousarray(flow)
+            valid = np.ascontiguousarray(valid)
+
+            return img1, img2, flow, valid

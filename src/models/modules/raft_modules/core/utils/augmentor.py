@@ -176,7 +176,7 @@ class FlowAugmentor:
         img1, img2, flow = self.spatial_transform(img1, img2, flow)
 
         if img1.dtype == '|O' or img1.shape == (1, 1) or img2.dtype == '|O' or img2.shape == (1, 1) or flow.dtype == '|O' or flow.shape == (1, 1):
-            return None, None, None
+            pass
 
         else:
             img1 = np.ascontiguousarray(img1)
@@ -344,9 +344,13 @@ class SparseFlowAugmentor:
         img1, img2 = self.eraser_transform(img1, img2)
         img1, img2, flow, valid = self.spatial_transform(img1, img2, flow, valid)
 
-        img1 = np.ascontiguousarray(img1)
-        img2 = np.ascontiguousarray(img2)
-        flow = np.ascontiguousarray(flow)
-        valid = np.ascontiguousarray(valid)
+        if img1.dtype == '|O' or img1.shape == (1, 1) or img2.dtype == '|O' or img2.shape == (1, 1) or flow.dtype == '|O' or flow.shape == (1, 1):  
+            pass
+        else:
 
-        return img1, img2, flow, valid
+            img1 = np.ascontiguousarray(img1)
+            img2 = np.ascontiguousarray(img2)
+            flow = np.ascontiguousarray(flow)
+            valid = np.ascontiguousarray(valid)
+
+            return img1, img2, flow, valid
