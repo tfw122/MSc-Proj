@@ -301,7 +301,17 @@ class SparseFlowAugmentor:
         print("low val", low_value)
         print("high val", high_value)
 
-        x0 = np.random.randint(max(low_value, 0), max(high_value, low_value + 1))
+        low = max(low_value, 0)
+        high = max(high_value, low_value + 1)
+
+        if high <= low:
+            # Handle the invalid case: You can return default values, modify high/low to be valid, or skip the sample.
+            return None, None, None, None
+        else:
+            x0 = np.random.randint(low, high)
+
+
+        #x0 = np.random.randint(max(low_value, 0), max(high_value, low_value + 1))
 
 
         y0 = np.random.randint(0, img1.shape[0] - self.crop_size[0] + margin_y)
