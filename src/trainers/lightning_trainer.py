@@ -75,7 +75,7 @@ class LightningTrainer(BaseTrainer):
         with omegaconf.open_dict(lightning_params):
             lightning_params.pop("max_steps")
             lightning_params.pop("max_epochs")
-            #lightning_params.pop("resume_from_checkpoint")
+            lightning_params.pop("resume_from_checkpoint")
 
         lightning_params_dict = OmegaConf.to_container(lightning_params, resolve=True)
         # max epochs specified in trainer_config;
