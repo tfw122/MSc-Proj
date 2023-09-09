@@ -81,8 +81,8 @@ def augmentation_parameters(config):
 
 def run_one_image(left_img, right_img, model, mask_ratio=None):
     # make it a batch-like
-    left_img = left_img.unsqueeze(dim=0)
-    right_img = right_img.unsqueeze(dim=0)
+    #left_img = left_img.unsqueeze(dim=0)
+    #right_img = right_img.unsqueeze(dim=0)
     #x = torch.einsum('nhwc->nchw', x)
 
     # run MAE
