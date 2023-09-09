@@ -179,45 +179,23 @@ model = build_model(config, ckpt_path= '../data/tiawarner/downstream4/mae_stereo
 print('::::::: model loaded with ckpt weights :::::::')
 
 idx=0
-if LOAD_IMG== "dataloader":
-    if TESTING=='downstream':
-        aug_params = augmentation_parameters(config)
-        train_dataset = TartanAirEasy(config = config, aug_params = aug_params, split='train')
-        val_dataset = TartanAirEasy(config = config, aug_params = aug_params, split='val')
-        
-        # left_image, right_image = dataset[i]
-        sample = train_dataset[idx]
-        _, left_img, right_img, disp, valid = sample
 
-        left_image= ToArray(left_img)
-        right_image= ToArray(right_img)
-        disp_map = ToArray(disp)
-        valid_map = ToArray(valid.unsqueeze(0))
+if load_img=="dataloader":
+    train_dataset = SceneFlowLoader(config, 'train', train_transforms)
+    val_dataset = SceneFlowLoader(config, 'val', train_transforms)
+    sample = val_dataset[idx]
+    left_img, right_img = sample['left_image'], sample['right_image']
 
-        fig, (ax1, ax2, ax3, ax4) = plt.subplots(1, 4)
-        fig.suptitle('Downstream Stereo Images')
-        ax1.imshow(left_image)
-        ax2.imshow(right_image)
-        ax3.imshow(disp_map, cmap='jet')
-        ax4.imshow(valid_map)
-        plt.show()
-        
-    else:
-        train_dataset = SceneFlowLoader(config, 'train', train_transforms)
-        val_dataset = SceneFlowLoader(config, 'val', train_transforms)
-        sample = val_dataset[idx]
-        left_img, right_img = sample['left_image'], sample['right_image']
+    left_image= ToArray(left_img)
+    right_image= ToArray(right_img)
 
-        left_image= ToArray(left_img)
-        right_image= ToArray(right_img)
-
-        fig, (ax1, ax2) = plt.subplots(1, 2)
-        fig.suptitle('MIM Stereo Images')
-        ax1.imshow(left_image)
-        ax1.axis('off')
-        ax2.imshow(right_image)
-        ax2.axis('off')
-        plt.show()
+    fig, (ax1, ax2) = plt.subplots(1, 2)
+    fig.suptitle('MIM Stereo Images')
+    ax1.imshow(left_image)
+    ax1.axis('off')
+    ax2.imshow(right_image)
+    ax2.axis('off')
+    plt.show()
 
 else:
     img_path_left = ""
