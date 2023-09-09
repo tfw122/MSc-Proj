@@ -198,11 +198,6 @@ left_img = left_img.resize((448,224))
 right_img = Image.open(img_path_right).convert('RGB')
 right_img = right_img.resize((448,224))
 
-left_img = left_img.cuda()
-left_mask = left_mask.cuda()
-
-right_img = right_img.cuda()
-right_mask = right_mask.cuda()
 
 
 assert np.shape(left_img) == (224, 448, 3)
@@ -224,6 +219,8 @@ torch.manual_seed(2) # <<< random seed for random masking.
 left_img_t = totensor(left_img)
 right_img_t = totensor(right_img)
 
+left_img = left_img.cuda()
+right_img = right_img.cuda()
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model = model.to(device)
