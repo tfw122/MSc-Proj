@@ -176,11 +176,12 @@ test_transforms = get_transforms(config, 'test')
 # load model; dataset etc;
 print(os.getcwd())
 model = build_model(config, ckpt_path= '../data/tiawarner/downstream4/mae_stereo_mim_perceptual/230824-210638/train_outputs/best-model-epoch=018-val_loss=0.52.ckpt')
+
 print('::::::: model loaded with ckpt weights :::::::')
 
 idx=0
 
-if load_img=="dataloader":
+if LOAD_IMG=="dataloader":
     train_dataset = SceneFlowLoader(config, 'train', train_transforms)
     val_dataset = SceneFlowLoader(config, 'val', train_transforms)
     sample = val_dataset[idx]
