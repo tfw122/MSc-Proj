@@ -37,7 +37,9 @@ global TESTING
 
 LOAD_IMG= "dataloader"
 TESTING = "downstream"
-print("end")
+
+
+
 
 
 def get_transforms(config, split):
@@ -210,10 +212,15 @@ show_image(totensor(right_img).permute(1,2,0), 'right image')
 
 
 
-
-    
 totensor = transforms.ToTensor()
 torch.manual_seed(2) # <<< random seed for random masking.
 left_img_t = totensor(left_img)
 right_img_t = totensor(right_img)
+
+
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+model = model.to(device)
+left_img_t = left_img_t.to(device)
+right_img_t = right_img_t.to(device)
+
 run_one_image(left_img_t, right_img_t, model, 0.75)
