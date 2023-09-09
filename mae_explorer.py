@@ -209,15 +209,11 @@ show_image(totensor(left_img).permute(1,2,0), 'left image')
 show_image(totensor(right_img).permute(1,2,0), 'right image')
 
 
-totensor = transforms.ToTensor()
-left_img_t = totensor(left_img)
-right_img_t = totensor(right_img)
-run_one_image(left_img_t, right_img_t, model)
+
 
     
-else:
-    totensor = transforms.ToTensor()
-    torch.manual_seed(2) # <<< random seed for random masking.
-    left_img_t = totensor(left_img)
-    right_img_t = totensor(right_img)
-    run_one_image(left_img_t, right_img_t, model, 0.75)
+totensor = transforms.ToTensor()
+torch.manual_seed(2) # <<< random seed for random masking.
+left_img_t = totensor(left_img)
+right_img_t = totensor(right_img)
+run_one_image(left_img_t, right_img_t, model, 0.75)
