@@ -184,9 +184,9 @@ idx=0
 
 
 
-img_path_left = "/data/stereo_data/middlebury/MiddEval3/testH/Bicycle2/im0.png"
+img_path_left = "../data/middlebury/testH/Bicycle2/im0.png"
     #"/data/stereo_data/middlebury/MiddEval3/testF/Classroom2/im0.png"
-img_path_right= "/data/stereo_data/middlebury/MiddEval3/testH/Bicycle2/im1.png"
+img_path_right= "../data/middlebury/testH/Bicycle2/im1.png"
     #"/data/stereo_data/middlebury/MiddEval3/testF/Classroom2/im1.png"
 
     # pre-process;
