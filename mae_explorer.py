@@ -182,47 +182,80 @@ model = build_model(config, ckpt_path= '../data/tiawarner/downstream4/stereo_dow
 print('::::::: model loaded with ckpt weights :::::::')
 
 idx=0
+if LOAD_IMG== "dataloader":
+    if TESTING=='downstream':
+        aug_params = augmentation_parameters(config)
+        train_dataset = TartanAirEasy(config = config, aug_params = aug_params, split='train')
+        val_dataset = TartanAirEasy(config = config, aug_params = aug_params, split='val')
+        
+        # left_image, right_image = dataset[i]
+        sample = train_dataset[idx]
+        _, left_img, right_img, disp, valid = sample
 
+        left_image= ToArray(left_img)
+        right_image= ToArray(right_img)
+        disp_map = ToArray(disp)
+        valid_map = ToArray(valid.unsqueeze(0))
 
-img_path_left = "../data/middlebury/testH/Bicycle2/im0.png"
+        fig, (ax1, ax2, ax3, ax4) = plt.subplots(1, 4)
+        fig.suptitle('Downstream Stereo Images')
+        ax1.imshow(left_image)
+        ax2.imshow(right_image)
+        ax3.imshow(disp_map, cmap='jet')
+        ax4.imshow(valid_map)
+        plt.show()
+        
+    else:
+        train_dataset = SceneFlowLoader(config, 'train', train_transforms)
+        val_dataset = SceneFlowLoader(config, 'val', train_transforms)
+        sample = val_dataset[idx]
+        left_img, right_img = sample['left_image'], sample['right_image']
+
+        left_image= ToArray(left_img)
+        right_image= ToArray(right_img)
+
+        fig, (ax1, ax2) = plt.subplots(1, 2)
+        fig.suptitle('MIM Stereo Images')
+        ax1.imshow(left_image)
+        ax1.axis('off')
+        ax2.imshow(right_image)
+        ax2.axis('off')
+        plt.show()
+
+else:
+    img_path_left = ""
+    # "/data/stereo_data/middlebury/MiddEval3/testH/Bicycle2/im0.png"
     #"/data/stereo_data/middlebury/MiddEval3/testF/Classroom2/im0.png"
-img_path_right= "../data/middlebury/testH/Bicycle2/im1.png"
+    img_path_right= ""
+    # "/data/stereo_data/middlebury/MiddEval3/testH/Bicycle2/im1.png"
     #"/data/stereo_data/middlebury/MiddEval3/testF/Classroom2/im1.png"
 
     # pre-process;
-left_img = Image.open(img_path_left).convert('RGB')
-left_img = left_img.resize((448,224))
+    left_img = Image.open(img_path_left).convert('RGB')
+    left_img = left_img.resize((448,224))
 
-right_img = Image.open(img_path_right).convert('RGB')
-right_img = right_img.resize((448,224))
+    right_img = Image.open(img_path_right).convert('RGB')
+    right_img = right_img.resize((448,224))
 
-
-
-assert np.shape(left_img) == (224, 448, 3)
-assert np.shape(right_img) == (224, 448, 3)
+    assert np.shape(left_img) == (224, 448, 3)
+    assert np.shape(right_img) == (224, 448, 3)
 
     # normalize by ImageNet mean and std
     #img = img - imagenet_mean
     #img = img / imagenet_std
-totensor = transforms.ToTensor()
+    totensor = transforms.ToTensor()
 
-plt.rcParams['figure.figsize'] = [5, 5]
-show_image(totensor(left_img).permute(1,2,0), 'left image')
-show_image(totensor(right_img).permute(1,2,0), 'right image')
+    plt.rcParams['figure.figsize'] = [5, 5]
+    show_image(totensor(left_img).permute(1,2,0), 'left image')
+    show_image(totensor(right_img).permute(1,2,0), 'right image')
 
 
-
-totensor = transforms.ToTensor()
-torch.manual_seed(2) # <<< random seed for random masking.
-left_img_t = totensor(left_img)
-right_img_t = totensor(right_img)
-
-left_img = left_img.cuda()
-right_img = right_img.cuda()
-
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-model = model.to(device)
-left_img_t = left_img_t.to(device)
-right_img_t = right_img_t.to(device)
-
-run_one_image(left_img_t, right_img_t, model, 0.75)
+if LOAD_IMG== "dataloader":
+    run_one_image(left_img, right_img, model)
+    
+else:
+    totensor = transforms.ToTensor()
+    torch.manual_seed(2) # <<< random seed for random masking.
+    left_img_t = totensor(left_img)
+    right_img_t = totensor(right_img)
+    run_one_image(left_img_t, right_img_t, model, 0.75)
