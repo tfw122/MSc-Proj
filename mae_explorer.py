@@ -177,13 +177,11 @@ test_transforms = get_transforms(config, 'test')
 
 # load model; dataset etc;
 print(os.getcwd())
-model = build_model(config, ckpt_path= '../data/tiawarner/downstream4/mae_stereo_mim_perceptual/230824-210638/train_outputs/best-model-epoch=018-val_loss=0.52.ckpt')
+model = build_model(config, ckpt_path= '../data/tiawarner/downstream4/stereo_downstream_perceptual/230906-230248/train_outputs/N-Step-Checkpoint_008_55780.ckpt')
 
 print('::::::: model loaded with ckpt weights :::::::')
 
 idx=0
-
-
 
 
 img_path_left = "../data/middlebury/testH/Bicycle2/im0.png"
