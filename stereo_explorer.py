@@ -72,7 +72,7 @@ def show_flow(input_left, flow_predictions):
     axs[0].axis('off')
     axs[1].imshow(flow_up, cmap='jet')
     axs[1].axis('off')
-    plt.savefig('show_flow_output.png')
+    plt.savefig('show_flow_output_1.png')
 
 
 def augmentation_parameters(config):
@@ -174,10 +174,10 @@ if LOAD_IMG== "dataloader":
 
 
 else:
-    img_path_left = "../data/middlebury/testH/Bicycle2/im0.png"
+    img_path_left = "../data/middlebury/testF/Classroom2/im0.png"
     # "/data/middlebury/testH/Bicycle2/im0.png"
     #"/data/middlebury/testF/Classroom2/im0.png"
-    img_path_right= "../data/middlebury/testH/Bicycle2/im1.png"
+    img_path_right= "../data/middlebury/testF/Classroom2/im1.png"
     # "/data/middlebury/testH/Bicycle2/im1.png"
     #"/data/middlebury/testF/Classroom2/im1.png"
 
@@ -219,8 +219,7 @@ else:
 
 
     flow_predictions = run_one_image(left_img_t, right_img_t, model)
-    print(flow_predictions)
 
     show_flow(left_img_t, flow_predictions)
-    print(show_flow(left_img_t, flow_predictions))
+
     
