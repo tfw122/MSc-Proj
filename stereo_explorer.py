@@ -157,6 +157,7 @@ if LOAD_IMG== "dataloader":
         val_dataset = SceneFlowLoader(config, 'val', train_transforms)
         sample = val_dataset[idx]
         left_img, right_img = sample['left_image'], sample['right_image']
+        
 
         left_image= ToArray(left_img)
         right_image= ToArray(right_img)
@@ -184,6 +185,10 @@ else:
     right_img = Image.open(img_path_right).convert('RGB')
     right_img = right_img.resize((448,224))
 
+    left_img = left_img.cuda()
+    right_img = right_img.cuda()
+
+
     assert np.shape(left_img) == (224, 448, 3)
     assert np.shape(right_img) == (224, 448, 3)
 
@@ -207,6 +212,8 @@ else:
     torch.manual_seed(2) # <<< random seed for random masking.
     left_img_t = totensor(left_img)
     right_img_t = totensor(right_img)
+
+
     flow_predictions = run_one_image(left_img_t, right_img_t, model)
 
     show_flow(left_img_t, flow_predictions)
