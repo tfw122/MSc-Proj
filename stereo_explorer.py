@@ -34,7 +34,7 @@ from src.datasets.dataset_zoo.stereo_vision_downstream.stereo_datasets_downstrea
 global LOAD_IMG
 global TESTING
 
-LOAD_IMG= "dataloader"
+LOAD_IMG= None
 TESTING = "mim"
 
 def get_transforms(config, split):
@@ -153,8 +153,8 @@ if LOAD_IMG== "dataloader":
         plt.show()
         
     else:
-        train_dataset = SceneFlowLoader(config, 'val', train_transforms)
-        val_dataset = SceneFlowLoader(config, 'train', train_transforms)
+        train_dataset = SceneFlowLoader(config, 'train', train_transforms)
+        val_dataset = SceneFlowLoader(config, 'val', train_transforms)
         sample = val_dataset[idx]
         left_img, right_img = sample['left_image'], sample['right_image']
 
@@ -170,10 +170,10 @@ if LOAD_IMG== "dataloader":
         plt.show()
 
 else:
-    img_path_left = ""
+    img_path_left = "../data/middlebury/testH/Bicycle2/im0.png"
     # "/data/middlebury/testH/Bicycle2/im0.png"
     #"/data/middlebury/testF/Classroom2/im0.png"
-    img_path_right= ""
+    img_path_right= "../data/middlebury/testH/Bicycle2/im1.png"
     # "/data/middlebury/testH/Bicycle2/im1.png"
     #"/data/middlebury/testF/Classroom2/im1.png"
 
