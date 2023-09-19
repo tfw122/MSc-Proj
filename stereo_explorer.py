@@ -185,8 +185,7 @@ else:
     right_img = Image.open(img_path_right).convert('RGB')
     right_img = right_img.resize((448,224))
 
-    left_img = left_img.cuda()
-    right_img = right_img.cuda()
+
 
 
     assert np.shape(left_img) == (224, 448, 3)
@@ -212,6 +211,8 @@ else:
     torch.manual_seed(2) # <<< random seed for random masking.
     left_img_t = totensor(left_img)
     right_img_t = totensor(right_img)
+    left_img_t = left_img_t.cuda()
+    right_img_t = right_img_t.cuda()
 
 
     flow_predictions = run_one_image(left_img_t, right_img_t, model)
