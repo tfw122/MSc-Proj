@@ -216,6 +216,7 @@ else:
 
 
     flow_predictions = run_one_image(left_img_t, right_img_t, model)
+    print(flow_predictions)
 
     show_flow(left_img_t, flow_predictions)
     print(show_flow(left_img_t, flow_predictions))
