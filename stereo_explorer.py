@@ -174,12 +174,14 @@ if LOAD_IMG== "dataloader":
 
 
 else:
-    img_path_left = "../data/middlebury/testF/Classroom2/im0.png"
+    img_path_left = "../data/SCARED/dataset_1/keyframe_1/Left_Image.png"
     # "/data/middlebury/testH/Bicycle2/im0.png"
     #"/data/middlebury/testF/Classroom2/im0.png"
-    img_path_right= "../data/middlebury/testF/Classroom2/im1.png"
+    #"/data/SCARED/dataset_1/"
+    img_path_right= "../data/SCARED/dataset_1/keyframe_1/Right_Image.png"
     # "/data/middlebury/testH/Bicycle2/im1.png"
     #"/data/middlebury/testF/Classroom2/im1.png"
+    #"/data/SCARED/dataset_1/"
 
     # pre-process;
     left_img = Image.open(img_path_left).convert('RGB')
@@ -187,7 +189,6 @@ else:
 
     right_img = Image.open(img_path_right).convert('RGB')
     right_img = right_img.resize((448,224))
-
 
 
 
