@@ -176,7 +176,7 @@ test_transforms = get_transforms(config, 'test')
 
 # load model; dataset etc;
 print(os.getcwd())
-model = build_model(config, ckpt_path= '../data/tiawarner/downstream4/stereo_downstream_perceptual/230906-230248/train_outputs/best-model-epoch=008-val_loss=280.12.ckpt')
+model = build_model(config, ckpt_path= '../data/tiawarner/downstream4/stereo_downstream_perceptual/230906-230248/train_outputs/N-Step-Checkpoint_008_55780.ckpt')
 print('::::::: model loaded with ckpt weights :::::::')
 
 idx=0
