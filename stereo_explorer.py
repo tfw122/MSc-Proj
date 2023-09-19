@@ -153,8 +153,8 @@ if LOAD_IMG== "dataloader":
         plt.show()
         
     else:
-        train_dataset = SceneFlowLoader(config, 'train', train_transforms)
-        val_dataset = SceneFlowLoader(config, 'val', train_transforms)
+        train_dataset = SceneFlowLoader(config, 'val', train_transforms)
+        val_dataset = SceneFlowLoader(config, 'train', train_transforms)
         sample = val_dataset[idx]
         left_img, right_img = sample['left_image'], sample['right_image']
 
