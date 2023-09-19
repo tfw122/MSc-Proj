@@ -72,7 +72,8 @@ def show_flow(input_left, flow_predictions):
     axs[0].axis('off')
     axs[1].imshow(flow_up, cmap='jet')
     axs[1].axis('off')
-    plt.show()
+    plt.savefig('show_flow_output.png')
+
 
 def augmentation_parameters(config):
     dataset_config = config.dataset_config
@@ -150,7 +151,8 @@ if LOAD_IMG== "dataloader":
         ax2.imshow(right_image)
         ax3.imshow(disp_map, cmap='jet')
         ax4.imshow(valid_map)
-        plt.show()
+        plt.savefig('output_image.png')
+
         
     else:
         train_dataset = SceneFlowLoader(config, 'train', train_transforms)
@@ -168,7 +170,8 @@ if LOAD_IMG== "dataloader":
         ax1.axis('off')
         ax2.imshow(right_image)
         ax2.axis('off')
-        plt.show()
+        plt.savefig('output_image.png')
+
 
 else:
     img_path_left = "../data/middlebury/testH/Bicycle2/im0.png"
